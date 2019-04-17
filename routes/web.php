@@ -21,8 +21,12 @@ Route::get('/','PagesController@index')->name('pages.index');
 Route::get('/about','PagesController@about')->name('pages.about');
 
 
-Route::resource('/todos','TodosController');
+Route::resource('/todos','TodoController');
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//https://stackoverflow.com/questions/52653533/laravel-5-7-email-verification-error-route-verification-verify-not-defined
+Auth::routes(['verify' => true]);
+
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
